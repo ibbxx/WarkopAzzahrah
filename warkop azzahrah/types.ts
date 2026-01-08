@@ -8,11 +8,12 @@ export interface CoffeeItem {
   imageUrl: string;
   category: 'best-seller' | 'new' | 'standard';
   type: 'beverage' | 'food';
+  stock: number;
 }
 
 export interface Promotion {
-    id: number;
-    title: string;
-    description: string;
-    imageUrl: string;
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
 }
