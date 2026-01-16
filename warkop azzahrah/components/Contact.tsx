@@ -2,8 +2,8 @@
 import React from 'react';
 
 const Contact: React.FC = () => {
-  const phoneNumber = "6287777347983"; // Nomor WhatsApp Baru
-  const displayPhone = "+62 877-7734-7983";
+  const phoneNumber = "62085256669994"; // Nomor WhatsApp Baru
+  const displayPhone = "+62 852-5666-9994";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=Halo%20Warkop%20Azzahra,%20saya%20ingin%20bertanya%20mengenai%20menu%20dan%20pemesanan.`;
 
   return (
