@@ -80,15 +80,6 @@ const About: React.FC = () => {
                 />
              </div>
              
-             {/* Secondary Detail Image */}
-             <div className={`absolute bottom-4 right-4 w-[55%] h-[50%] rounded-[2rem] overflow-hidden shadow-2xl z-20 border-8 border-[#fffaf5] ${isVisible ? 'animate-blur-in delay-500' : 'opacity-0'}`}>
-                <img 
-                    src="https://images.unsplash.com/photo-1559056191-4917a1191317?q=80&w=1200&auto=format&fit=crop" 
-                    alt="Coffee roasting" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-[2s]"
-                />
-             </div>
-
              {/* Floating Badge - Smaller for balance */}
              <div className="absolute -top-4 -right-4 z-30 animate-bounce-slow">
                 <div className="w-24 h-24 rounded-full bg-amber-500 flex items-center justify-center border-4 border-white shadow-xl rotate-12">

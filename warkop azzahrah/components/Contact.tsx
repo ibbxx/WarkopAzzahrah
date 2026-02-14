@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 
 const Contact: React.FC = () => {
   const phoneNumber = "62085256669994"; // Nomor WhatsApp Baru
   const displayPhone = "+62 852-5666-9994";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=Halo%20Warkop%20Azzahra,%20saya%20ingin%20bertanya%20mengenai%20menu%20dan%20pemesanan.`;
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+  const [isCareerImageError, setIsCareerImageError] = useState(false);
+  const careerPosterImage = "/asset/image.png";
 
   return (
     <section id="kontak" className="py-20 bg-stone-950 text-white border-t border-stone-800">
@@ -21,6 +24,19 @@ const Contact: React.FC = () => {
             <div>
               <h3 className="text-2xl font-semibold mb-3 text-amber-400 font-serif">Jam Buka</h3>
               <p className="text-stone-300 font-light tracking-wide">Senin - Minggu<br />08:00 - 22:00 WIB</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCareerImageError(false);
+                  setIsCareerModalOpen(true);
+                }}
+                className="mt-4 inline-flex items-center text-2xl font-semibold text-amber-400 font-serif transition-colors duration-300 hover:text-amber-300"
+              >
+                Career
+              </button>
+              <p className="mt-3 text-stone-300 font-light tracking-wide">
+                Ingin bergabung bersama tim kami? Klik Career untuk melihat info lowongan terbaru.
+              </p>
             </div>
 
             {/* WhatsApp Section */}
@@ -67,6 +83,48 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {isCareerModalOpen && (
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Career Poster"
+          onClick={() => setIsCareerModalOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-stone-700 bg-stone-900 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsCareerModalOpen(false)}
+              className="absolute right-3 top-3 z-10 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/80"
+              aria-label="Tutup popup career"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {!isCareerImageError ? (
+              <img
+                src={careerPosterImage}
+                alt="Poster lowongan kerja Warkop Azzahra"
+                className="max-h-[85vh] w-full object-contain"
+                onError={() => setIsCareerImageError(true)}
+              />
+            ) : (
+              <div className="p-10 text-center text-stone-200">
+                <p className="text-lg font-bold text-amber-300">Poster career belum ditemukan.</p>
+                <p className="mt-2 text-sm text-stone-300">
+                  Simpan file poster ke <code className="rounded bg-stone-800 px-2 py-1">public/asset/image.png</code>
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 };
