@@ -82,18 +82,24 @@ const MenuPage: React.FC<MenuPageProps> = ({ onNavigateHome }) => {
       {/* Centered Navigation */}
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-100">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-           <div className="flex flex-col">
-              <h1 className="text-lg font-black tracking-tight leading-none">WARKOP AZZAHRA</h1>
-              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mt-1">Digital Menu Catalog</span>
+           <div className="flex items-center gap-3">
+              <div className="h-10 w-10 overflow-hidden rounded-xl bg-stone-100">
+                <img src="/asset/minuman/ice kopi aren.PNG" alt="Logo" className="h-full w-full object-cover scale-150 rotate-3" />
+              </div>
+              <div className="flex flex-col">
+                <h1 className="text-lg font-black tracking-tight leading-none">WARKOP AZZAHRA</h1>
+                <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mt-1">Digital Menu Catalog</span>
+              </div>
            </div>
            <button
              onClick={onNavigateHome}
              className="text-xs font-bold uppercase tracking-widest text-stone-500 hover:text-stone-900 transition-colors"
            >
-             Website
+             Beranda
            </button>
         </div>
       </nav>
+
 
       <div className="max-w-5xl mx-auto px-4 pt-16">
         {/* Simple Search & Filter */}
