@@ -84,8 +84,9 @@ const MenuPage: React.FC<MenuPageProps> = ({ onNavigateHome }) => {
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
            <div className="flex items-center gap-3">
               <div className="h-10 w-10 overflow-hidden rounded-xl bg-stone-100">
-                <img src="/asset/minuman/ice kopi aren.PNG" alt="Logo" className="h-full w-full object-cover scale-150 rotate-3" />
+                <img src="/favicon.jpg" alt="Logo" className="h-full w-full object-cover" />
               </div>
+
               <div className="flex flex-col">
                 <h1 className="text-lg font-black tracking-tight leading-none">WARKOP AZZAHRA</h1>
                 <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mt-1">Digital Menu Catalog</span>
