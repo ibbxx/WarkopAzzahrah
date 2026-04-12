@@ -89,8 +89,8 @@ const MenuPage: React.FC<MenuPageProps> = ({ onNavigateHome }) => {
 
               <div className="flex flex-col">
                 <h1 className="text-lg font-black tracking-tight leading-none">WARKOP AZZAHRA</h1>
-                <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mt-1">Digital Menu Catalog</span>
               </div>
+
            </div>
            <button
              onClick={onNavigateHome}
