@@ -20,67 +20,65 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ item, isOpen, o
 
   return (
     <div 
-      className="fixed inset-0 z-[110] flex items-end justify-center bg-stone-950/80 p-0 backdrop-blur-md md:items-center md:p-4 animate-in fade-in duration-300"
+      className="fixed inset-0 z-[110] flex items-end justify-center bg-white/20 p-0 backdrop-blur-xl md:items-center md:p-6 animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div 
-        className="relative flex max-h-[95vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-[3rem] bg-[#fdfbf7] shadow-2xl md:max-h-[85vh] md:flex-row md:rounded-[3.5rem] animate-in slide-in-from-bottom-10 duration-500"
+        className="relative flex h-[90vh] w-full max-w-4xl flex-col overflow-hidden bg-white shadow-[0_0_100px_rgba(0,0,0,0.1)] md:h-auto md:max-h-[85vh] md:flex-row md:rounded-3xl"
         onClick={e => e.stopPropagation()}
       >
-        {/* Close Button Mobile */}
-        <button 
-          onClick={onClose}
-          className="absolute right-6 top-6 z-20 rounded-full bg-white/80 p-3 backdrop-blur-md transition-transform hover:scale-110 md:hidden"
-        >
-          <svg className="h-6 w-6 text-stone-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="relative h-[40vh] w-full shrink-0 md:h-auto md:w-5/12">
+        {/* Gallery Panel */}
+        <div className="relative h-2/5 w-full shrink-0 md:h-auto md:w-1/2">
             <img src={item.imageUrl} alt={item.name} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 to-transparent md:hidden" />
-            <div className="absolute bottom-8 left-8">
-                <span className="bg-stone-900 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] text-white">
-                    {item.type === 'food' ? 'Kitchen Menu' : 'Signature Drinks'}
+            <div className="absolute top-6 left-6">
+                <span className="bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-stone-900 shadow-sm border border-stone-100">
+                    {item.type === 'food' ? 'Dapur' : 'Minuman'}
                 </span>
             </div>
         </div>
 
-        <div className="flex w-full flex-col overflow-y-auto p-8 sm:p-12 md:p-16">
-            <header className="mb-8">
-                <div className="flex items-start justify-between gap-6">
-                    <h2 className="text-4xl font-bold leading-[0.9] tracking-tighter text-stone-900 sm:text-6xl">{item.name}</h2>
-                    <button onClick={onClose} className="hidden md:block rounded-full border border-stone-200 p-4 transition-all hover:bg-stone-900 hover:text-white">
-                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <p className="mt-6 text-3xl font-serif-elegant italic text-amber-600">{formatCurrency(item.price)}</p>
-            </header>
+        {/* Content Panel */}
+        <div className="flex w-full flex-col overflow-y-auto p-8 sm:p-12 md:w-1/2">
+            <div className="flex justify-between items-start mb-10">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-black leading-tight tracking-tighter text-stone-900">{item.name}</h2>
+                <div className="w-12 h-1 bg-stone-900" />
+              </div>
+              <button 
+                onClick={onClose}
+                className="p-2 rounded-full hover:bg-stone-50 transition-colors"
+              >
+                <svg className="h-6 w-6 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
 
-            <div className="flex-grow space-y-10">
-                <div className="animate-reveal">
-                    <h4 className="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4">The Story</h4>
-                    <p className="text-stone-600 text-lg leading-relaxed font-serif-text italic">{item.description}</p>
+            <div className="space-y-8 flex-grow">
+                <div>
+                    <h4 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">Harga</h4>
+                    <p className="text-2xl font-black text-stone-900">{formatCurrency(item.price)}</p>
                 </div>
                 
-                <div className="pt-10 border-t border-stone-200/60 animate-reveal delay-100">
-                    <h4 className="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4">Experience</h4>
-                    <p className="text-stone-500 leading-relaxed text-sm bg-stone-50 p-6 rounded-[2rem] border border-stone-100">
-                      {item.details}
-                    </p>
+                <div>
+                    <h4 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">Deskripsi</h4>
+                    <p className="text-stone-600 leading-relaxed">{item.description}</p>
                 </div>
+
+                {item.details && (
+                  <div className="pt-8 border-t border-stone-100">
+                      <h4 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">Detail Tambahan</h4>
+                      <p className="text-stone-500 text-sm italic leading-relaxed">{item.details}</p>
+                  </div>
+                )}
             </div>
 
             <div className="mt-12">
                 <button
                     onClick={onClose}
-                    className="group relative w-full overflow-hidden rounded-full bg-stone-900 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-amber-600 active:scale-[0.98]"
-                >
-                    <span className="relative z-10">Return to Catalog</span>
-                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+                    className="w-full bg-stone-900 text-white py-5 rounded-xl text-[11px] font-bold uppercase tracking-widest hover:bg-stone-800 transition-colors"
+                  >
+                    Kembali Ke Menu
                 </button>
             </div>
         </div>
