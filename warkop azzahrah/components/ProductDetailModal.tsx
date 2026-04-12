@@ -10,77 +10,79 @@ interface ProductDetailModalProps {
 const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ item, isOpen, onClose }) => {
   if (!isOpen || !item) return null;
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
-
   return (
     <div 
-      className="fixed inset-0 z-[110] flex items-end justify-center bg-white/20 p-0 backdrop-blur-xl md:items-center md:p-6 animate-in fade-in duration-300"
+      className="fixed inset-0 z-[110] flex items-center justify-center p-4 backdrop-blur-md bg-stone-900/40 animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div 
-        className="relative flex h-[90vh] w-full max-w-4xl flex-col overflow-hidden bg-white shadow-[0_0_100px_rgba(0,0,0,0.1)] md:h-auto md:max-h-[85vh] md:flex-row md:rounded-3xl"
+        className="bg-paper-premium w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] sm:rounded-[4rem] shadow-[0_0_100px_rgba(0,0,0,0.2)] border-4 border-black animate-in zoom-in-95 duration-500"
         onClick={e => e.stopPropagation()}
       >
-        {/* Gallery Panel */}
-        <div className="relative h-2/5 w-full shrink-0 md:h-auto md:w-1/2">
-            <img src={item.imageUrl} alt={item.name} className="h-full w-full object-cover" />
-            <div className="absolute top-6 left-6">
-                <span className="bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-stone-900 shadow-sm border border-stone-100">
-                    {item.type === 'food' ? 'Dapur' : 'Minuman'}
-                </span>
-            </div>
-        </div>
+        <div className="relative p-8 sm:p-16">
+          {/* Close Button */}
+          <button 
+            onClick={onClose}
+            className="absolute top-8 right-8 p-2 rounded-full hover:bg-stone-100 transition-colors z-10"
+          >
+             <svg className="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+             </svg>
+          </button>
 
-        {/* Content Panel */}
-        <div className="flex w-full flex-col overflow-y-auto p-8 sm:p-12 md:w-1/2">
-            <div className="flex justify-between items-start mb-10">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-black leading-tight tracking-tighter text-stone-900">{item.name}</h2>
-                <div className="w-12 h-1 bg-stone-900" />
+          <div className="flex flex-col gap-12">
+            {/* Artistic Header Section */}
+            <div className="text-center space-y-4">
+               <h4 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.5em] text-stone-400">Authentic Catalog</h4>
+               <h2 className="font-cursive text-6xl sm:text-9xl text-black leading-none">{item.name}</h2>
+               <div className="flex justify-center pt-4">
+                 <div className="brush-banner">
+                   <span className="text-lg sm:text-2xl font-black uppercase tracking-[0.2em]">Product Details</span>
+                 </div>
+               </div>
+            </div>
+
+            {/* Content Body: Image and Info side-by-side or stacked cleanly */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="relative aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl border-2 border-black">
+                 <img src={item.imageUrl} alt={item.name} className="h-full w-full object-cover" />
+                 <div className="absolute bottom-6 right-6">
+                    <div className="price-circle !w-20 !h-20 !text-2xl shadow-2xl">
+                       {Math.round(item.price / 1000)}
+                    </div>
+                 </div>
               </div>
-              <button 
-                onClick={onClose}
-                className="p-2 rounded-full hover:bg-stone-50 transition-colors"
-              >
-                <svg className="h-6 w-6 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
 
-            <div className="space-y-8 flex-grow">
-                <div>
-                    <h4 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">Harga</h4>
-                    <p className="text-2xl font-black text-stone-900">{formatCurrency(item.price)}</p>
-                </div>
-                
-                <div>
-                    <h4 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">Deskripsi</h4>
-                    <p className="text-stone-600 leading-relaxed">{item.description}</p>
-                </div>
+              <div className="space-y-8">
+                 <div className="space-y-3">
+                    <h4 className="text-xs font-black uppercase tracking-[0.3em] text-black border-b-2 border-black inline-block pb-1">Description</h4>
+                    <p className="text-stone-800 text-lg sm:text-xl leading-relaxed italic font-medium">
+                       "{item.description}"
+                    </p>
+                 </div>
 
-                {item.details && (
-                  <div className="pt-8 border-t border-stone-100">
-                      <h4 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">Detail Tambahan</h4>
-                      <p className="text-stone-500 text-sm italic leading-relaxed">{item.details}</p>
-                  </div>
-                )}
-            </div>
+                 <div className="space-y-3">
+                    <h4 className="text-xs font-black uppercase tracking-[0.3em] text-black border-b-2 border-black inline-block pb-1">Additional Info</h4>
+                    <p className="text-stone-500 text-sm leading-relaxed">
+                       {item.details || "Disajikan dengan penuh rasa dan keikhlasan oleh tim Warkop Azzahra. Harap tanyakan ketersediaan stok kepada kru kami."}
+                    </p>
+                 </div>
 
-            <div className="mt-12">
-                <button
-                    onClick={onClose}
-                    className="w-full bg-stone-900 text-white py-5 rounded-xl text-[11px] font-bold uppercase tracking-widest hover:bg-stone-800 transition-colors"
-                  >
-                    Kembali Ke Menu
-                </button>
+                 <div className="pt-8 w-full">
+                    <button
+                      onClick={onClose}
+                      className="w-full bg-black text-white py-5 rounded-2xl text-[12px] font-black uppercase tracking-[0.4em] hover:bg-stone-800 transition-all shadow-xl active:scale-95"
+                    >
+                      CLOSE SELECTION
+                    </button>
+                 </div>
+              </div>
             </div>
+            
+            <div className="text-center">
+               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-stone-300">WARKOP AZZAHRA EST. 2024</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
