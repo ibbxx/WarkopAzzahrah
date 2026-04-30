@@ -1,7 +1,7 @@
 
-import { CoffeeItem, Promotion } from './types';
+import { MenuItem, Promotion } from '../types/menu';
 
-export const MENU_ITEMS: CoffeeItem[] = [
+export const MENU_ITEMS: MenuItem[] = [
   {
     id: 1,
     name: 'Caramel Priline Machiatto',
